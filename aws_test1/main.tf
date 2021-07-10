@@ -8,10 +8,11 @@ resource "aws_instance" "example" {
   user_data = <<-EOF
               #!/bin/bash
               echo "<center>AWS TEST1</center>
-                    <center>Date/Time: <span id="datetime"></span></center>
+                    <center>Date/Time: <span id=\"datetime\"></span></center>
+
                     <script>
                     var dt = new Date();
-                    document.getElementById("datetime").innerHTML = dt.toLocaleString();
+                    document.getElementById(\"datetime\").innerHTML = dt.toLocaleString();
                     </script>" > index.html
               nohup busybox httpd -f -p ${var.server_port} &
               EOF
