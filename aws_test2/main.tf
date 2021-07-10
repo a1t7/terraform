@@ -62,7 +62,13 @@ resource "aws_launch_configuration" "example" {
   security_groups = [aws_security_group.instance.id]
   user_data = <<-EOF
               #!/bin/bash
-              echo "AWS test2" > index.html
+              echo "<center>AWS TEST2</center>
+                    <center>Date/Time: <span id=\"datetime\"></span></center>
+
+                    <script>
+                    var dt = new Date();
+                    document.getElementById(\"datetime\").innerHTML = dt.toLocaleString();
+                    </script>" > index.html
               nohup busybox httpd -f -p ${var.server_port} &
               EOF
   lifecycle {
