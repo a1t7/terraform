@@ -7,7 +7,12 @@ resource "aws_instance" "example" {
   vpc_security_group_ids = [aws_security_group.instance.id]
   user_data = <<-EOF
               #!/bin/bash
-              echo "AWS test1" > index.html
+              echo "<center>AWS TEST1</center>
+                    <center>Date/Time: <span id="datetime"></span></center>
+                    <script>
+                    var dt = new Date();
+                    document.getElementById("datetime").innerHTML = dt.toLocaleString();
+                    </script>" > index.html
               nohup busybox httpd -f -p ${var.server_port} &
               EOF
   tags = {
